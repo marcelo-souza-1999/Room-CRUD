@@ -7,17 +7,17 @@ import com.marcelo.crudroom.database.entity.Subscriber
 @Dao
 interface SubscriberDAO {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSubscriber(subscriber: Subscriber): Long
+    @Insert
+    suspend fun insertSubscriber(subscriber: Subscriber) : Long
 
     @Update
-    suspend fun updateSubscriber(subscriber: Subscriber)
+    suspend fun updateSubscriber(subscriber: Subscriber) : Int
 
     @Delete
-    suspend fun deleteSubscriber(subscriber: Subscriber)
+    suspend fun deleteSubscriber(subscriber: Subscriber) : Int
 
     @Query("DELETE FROM subscriber")
-    suspend fun deleteAll()
+    suspend fun deleteAll() : Int
 
     @Query("SELECT * FROM subscriber")
     fun getAllSubscribers():LiveData<List<Subscriber>>
