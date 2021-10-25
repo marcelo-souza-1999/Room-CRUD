@@ -10,10 +10,15 @@
             type="com.marcelo.crudroom.ui.viewmodel.SubscriberViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/screen_default_padding"
+        android:padding="@dimen/screen_default_padding_16"
         tools:context=".ui.activity.MainActivity">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -23,7 +28,7 @@
             android:layout_marginStart="@dimen/forms_default_margin_start_8"
             android:layout_marginTop="@dimen/forms_default_margin_top_8"
             android:layout_marginEnd="@dimen/forms_default_margin_end_8"
-            android:hint="@string/text_hint_nome"
+            android:hint="@string/text_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -45,7 +50,7 @@
             android:layout_marginStart="@dimen/forms_default_margin_start_8"
             android:layout_marginTop="@dimen/forms_default_margin_top_16"
             android:layout_marginEnd="@dimen/forms_default_margin_end_8"
-            android:hint="@string/text_hint_email"
+            android:hint="@string/text_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtInputLayoutName">
@@ -79,7 +84,7 @@
                 android:layout_weight="1"
                 android:onClick="@{()->myViewModel.saveUpdate()}"
                 android:text="@={myViewModel.saveUpdateButtonText}"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size_18" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/clear_all_or_delete_button"
@@ -89,7 +94,7 @@
                 android:layout_weight="1"
                 android:onClick="@{()->myViewModel.clearDelete()}"
                 android:text="@={myViewModel.clearDeleteButtonText}"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size_18" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -104,8 +109,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/list_subscribers" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

@@ -13,6 +13,8 @@ import kotlinx.coroutines.launch
 class SubscriberViewModel(private val repository: SubscriberRepository) : ViewModel(), Observable {
 
     val subscribers = repository.subscribers
+    private var isUpdateDelete = false
+    private lateinit var subscriberToUpdateDelete: Subscriber
 
     @Bindable
     val inputName = MutableLiveData<String>()
@@ -32,19 +34,30 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     }
 
     fun saveUpdate() {
-        val name: String = inputName.value!!
-        val email: String = inputEmail.value!!
-        insert(Subscriber(0,name, email))
+        if (isUpdateDelete) {
+            subscriberToUpdateDelete.name = inputName.value!!
+            subscriberToUpdateDelete.email = inputEmail.value!!
+            update(subscriberToUpdateDelete)
+        } else {
+            val name: String = inputName.value!!
+            val email: String = inputEmail.value!!
+            insert(Subscriber(0, name, email))
 
-        inputName.value = null
-        inputEmail.value = null
+            inputName.value = null
+            inputEmail.value = null
+        }
+
     }
 
     fun clearDelete() {
-        clearAll()
+        if (isUpdateDelete) {
+            delete(subscriberToUpdateDelete)
+        } else {
+            clearAll()
+        }
     }
 
-    private fun insert(subscriber: Subscriber){
+    private fun insert(subscriber: Subscriber) {
         viewModelScope.launch {
             repository.insert(subscriber)
         }
@@ -53,12 +66,22 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
     fun update(subscriber: Subscriber) {
         viewModelScope.launch {
             repository.update(subscriber)
+            inputName.value = null
+            inputEmail.value = null
+            isUpdateDelete = false
+            saveUpdateButtonText.value = "Salvar"
+            clearDeleteButtonText.value = "Apagar"
         }
     }
 
-    fun delete(subscriber: Subscriber) {
+    private fun delete(subscriber: Subscriber) {
         viewModelScope.launch {
             repository.delete(subscriber)
+            inputName.value = null
+            inputEmail.value = null
+            isUpdateDelete = false
+            saveUpdateButtonText.value = "Salvar"
+            clearDeleteButtonText.value = "Apagar"
         }
     }
 
@@ -68,12 +91,13 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
         }
     }
 
-    class ViewModelFactory(val repository: SubscriberRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if (modelClass.isAssignableFrom(SubscriberViewModel::class.java))
-                return SubscriberViewModel(repository) as T
-            throw IllegalArgumentException("Classe ViewModel desconhecida")
-        }
+    fun initUpdateDelete(subscriber: Subscriber) {
+        inputName.value = subscriber.name
+        inputEmail.value = subscriber.email
+        isUpdateDelete = true
+        subscriberToUpdateDelete = subscriber
+        saveUpdateButtonText.value = "Atualizar"
+        clearDeleteButtonText.value = "Apagar"
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
@@ -82,5 +106,13 @@ class SubscriberViewModel(private val repository: SubscriberRepository) : ViewMo
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
+    }
+
+    class ViewModelFactory(val repository: SubscriberRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(SubscriberViewModel::class.java))
+                return SubscriberViewModel(repository) as T
+            throw IllegalArgumentException("Classe ViewModel desconhecida")
+        }
     }
 }
