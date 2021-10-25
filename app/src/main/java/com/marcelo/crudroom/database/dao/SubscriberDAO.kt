@@ -7,7 +7,7 @@ import com.marcelo.crudroom.database.entity.Subscriber
 @Dao
 interface SubscriberDAO {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSubscriber(subscriber: Subscriber) : Long
 
     @Update
