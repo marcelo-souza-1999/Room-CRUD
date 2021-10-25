@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_default_padding">16dp</dimen>
+    <dimen name="forms_default_margin_top_8">8dp</dimen>
+    <dimen name="forms_default_margin_top_16">16dp</dimen>
+    <dimen name="forms_default_margin_top_24">24dp</dimen>
+    <dimen name="forms_default_margin_start_8">8dp</dimen>
+    <dimen name="forms_default_margin_start_5">5dp</dimen>
+    <dimen name="forms_default_margin_end_8">8dp</dimen>
+    <dimen name="text_size">18sp</dimen>
+</resources>
