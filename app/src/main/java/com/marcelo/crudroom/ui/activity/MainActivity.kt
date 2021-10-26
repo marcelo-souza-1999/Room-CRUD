@@ -7,50 +7,57 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelo.crudroom.R
-import com.marcelo.crudroom.database.app.SubscriberDatabase
-import com.marcelo.crudroom.database.dao.SubscriberDAO
-import com.marcelo.crudroom.database.entity.Subscriber
+import com.marcelo.crudroom.database.app.UserDatabase
+import com.marcelo.crudroom.database.dao.UserDAO
+import com.marcelo.crudroom.database.entity.UserEntity
 import com.marcelo.crudroom.databinding.ActivityMainBinding
-import com.marcelo.crudroom.repository.SubscriberRepository
-import com.marcelo.crudroom.ui.adapter.SubscriberAdapter
-import com.marcelo.crudroom.ui.viewmodel.SubscriberViewModel
+import com.marcelo.crudroom.repository.UserRepository
+import com.marcelo.crudroom.ui.adapter.UserAdapter
+import com.marcelo.crudroom.ui.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var subscribeViewModel: SubscriberViewModel
+    private lateinit var userViewModel: UserViewModel
+    private lateinit var adapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setupViewModel()
         initRecyclerView()
+
+        userViewModel.message.observe(this, { messages ->
+            messages.getContentIfNotHandled()?.let { event ->
+                Toast.makeText(this, event, Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun setupViewModel() {
-        val dao: SubscriberDAO = SubscriberDatabase.getInstance(application).subscriberDAO
-        val repository = SubscriberRepository(dao)
-        val factory = SubscriberViewModel.ViewModelFactory(repository)
-        subscribeViewModel = ViewModelProvider(this, factory).get(SubscriberViewModel::class.java)
-        binding.myViewModel = subscribeViewModel
+        val dao: UserDAO = UserDatabase.getInstance(application).userDAO
+        val repository = UserRepository(dao)
+        val factory = UserViewModel.ViewModelFactory(repository)
+        userViewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
+        binding.myViewModel = userViewModel
         binding.lifecycleOwner = this
     }
 
     private fun initRecyclerView() {
         binding.recyclerSubscribers.layoutManager = LinearLayoutManager(this)
+        adapter = UserAdapter { selectedItem: UserEntity -> listItemClicked(selectedItem) }
+        binding.recyclerSubscribers.adapter = adapter
         displaySubscribersList()
     }
 
     private fun displaySubscribersList() {
-        subscribeViewModel.subscribers.observe(this, { subscribers ->
-            binding.recyclerSubscribers.adapter =
-                SubscriberAdapter(subscribers) { selectedItem: Subscriber ->
-                    listItemClicked(selectedItem)
-                }
+        userViewModel.subscribers.observe(this, { subscribers ->
+            adapter.setList(subscribers)
+            adapter.notifyDataSetChanged()
         })
     }
 
-    private fun listItemClicked(subscriber: Subscriber) {
-        Toast.makeText(this, "Nome selecionado é ${subscriber.name}", Toast.LENGTH_LONG).show()
-        subscribeViewModel.initUpdateDelete(subscriber)
+    private fun listItemClicked(userEntity: UserEntity) {
+        Toast.makeText(this, "Nome selecionado é ${userEntity.name}", Toast.LENGTH_LONG).show()
+        userViewModel.initUpdateDelete(userEntity)
     }
 }

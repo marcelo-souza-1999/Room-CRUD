@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "subscriber")
-data class Subscriber(
+data class UserEntity(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "subscriber_id")

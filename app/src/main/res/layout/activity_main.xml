@@ -7,7 +7,7 @@
     <data>
         <variable
             name="myViewModel"
-            type="com.marcelo.crudroom.ui.viewmodel.SubscriberViewModel" />
+            type="com.marcelo.crudroom.ui.viewmodel.UserViewModel" />
     </data>
 
     <ScrollView
@@ -17,7 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="@dimen/screen_default_padding_16"
         tools:context=".ui.activity.MainActivity">
 
@@ -110,7 +110,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/list_subscribers" />
+            tools:listitem="@layout/list_users" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
