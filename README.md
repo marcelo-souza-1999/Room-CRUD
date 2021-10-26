@@ -1,6 +1,6 @@
 ## CRUD - Using Room, Coroutines, LiveData, DataBinding, MVVM and Dependency Injection with Koin..
 
-Para melhorar meu conhecimento com o desenvolvimento Android, fiz esse aplicativo que realiza um CRUD simples de usuários usando nome e e-mail, fiz usando a lib Room do conjunto Android JetPack, ela permite o acesso às funções do SQLite de uma forma muito simples, sem a necessidade de ficar criando códigos e as classes para criar um banco de dados no seu aplicativo utilizando apenas anotações em suas classes a biblioteca faz todo o trabalho no SQLite por debaixo dos panos. Esse aplicativo seguiu a arquitetura MVVM, uso do DataBinding e também foi usado a biblioteca Koin para realizar a injeção de dependência no aplicativo.
+Para melhorar meu conhecimento com o desenvolvimento Android, fiz esse aplicativo que realiza um CRUD simples de usuários usando nome e e-mail, fiz usando a lib Room do conjunto Android JetPack, ela permite o acesso às funções do SQLite de uma forma muito simples, sem a necessidade de ficar criando códigos e as classes para criar um banco de dados no seu aplicativo utilizando apenas anotações em suas classes a biblioteca faz todo o trabalho no SQLite por debaixo dos panos. Esse aplicativo seguiu a arquitetura MVVM, uso do DataBinding, Kotlin Coroutines e também foi usado a biblioteca Koin para realizar a injeção de dependência no aplicativo.
 
 ## Screenshots do aplicativo
 <img src="/imgs/image_1.png" width="200">
@@ -14,6 +14,7 @@ Para melhorar meu conhecimento com o desenvolvimento Android, fiz esse aplicativ
 * Koin
 * Room
 * DataBinding
+* Coroutines
 * ViewModel
 * LiveData
 * Constraint Layout
