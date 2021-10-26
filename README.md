@@ -17,6 +17,7 @@ e também foi usado a bibilioteca Koin para realizar a injeção de dependência
 * Android Studio
 * Arquitetura MVVM
 * Koin
+* Room
 * DataBinding
 * ViewModel
 * LiveData
