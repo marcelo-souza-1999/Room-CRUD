@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import com.marcelo.crudroom.database.dao.UserDAO
 import com.marcelo.crudroom.database.entity.UserEntity
 
-@Database(entities = [UserEntity::class], version = 1)
+@Database(entities = [UserEntity::class], version = 1, exportSchema = false)
 abstract class UserDatabase : RoomDatabase() {
 
-    abstract val userDAO: UserDAO
+    abstract fun userDAO(): UserDAO
+    //abstract val userDAO: UserDAO
 
-    companion object {
+    /*companion object {
         @Volatile
         private var INSTANCE: UserDatabase? = null
 
@@ -23,12 +24,11 @@ abstract class UserDatabase : RoomDatabase() {
                         instance = Room.databaseBuilder(
                             context.applicationContext,
                             UserDatabase::class.java,
-                            "subscriber_database"
+                            "crud_database"
                         ).build()
                     }
                 return instance
             }
         }
-    }
-
+    }*/
 }

@@ -4,20 +4,18 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.marcelo.crudroom.R
-import com.marcelo.crudroom.database.app.UserDatabase
-import com.marcelo.crudroom.database.dao.UserDAO
 import com.marcelo.crudroom.database.entity.UserEntity
 import com.marcelo.crudroom.databinding.ActivityMainBinding
-import com.marcelo.crudroom.repository.UserRepository
 import com.marcelo.crudroom.ui.adapter.UserAdapter
 import com.marcelo.crudroom.ui.viewmodel.UserViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var userViewModel: UserViewModel
+    //private lateinit var userViewModel: UserViewModel
+    private val userViewModel: UserViewModel  by viewModel()
     private lateinit var adapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +32,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
-        val dao: UserDAO = UserDatabase.getInstance(application).userDAO
-        val repository = UserRepository(dao)
-        val factory = UserViewModel.ViewModelFactory(repository)
-        userViewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
+        //val dao: UserDAO = UserDatabase.getInstance(application).userDAO
+        //val repository = UserRepository(dao)
+        //val factory = UserViewModel.ViewModelFactory(repository)
+        //userViewModel = ViewModelProvider(this, factory).get(UserViewModel::class.java)
         binding.myViewModel = userViewModel
         binding.lifecycleOwner = this
     }
