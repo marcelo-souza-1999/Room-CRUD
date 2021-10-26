@@ -4,25 +4,25 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.marcelo.crudroom.database.dao.SubscriberDAO
-import com.marcelo.crudroom.database.entity.Subscriber
+import com.marcelo.crudroom.database.dao.UserDAO
+import com.marcelo.crudroom.database.entity.UserEntity
 
-@Database(entities = [Subscriber::class], version = 1)
-abstract class SubscriberDatabase : RoomDatabase() {
+@Database(entities = [UserEntity::class], version = 1)
+abstract class UserDatabase : RoomDatabase() {
 
-    abstract val subscriberDAO: SubscriberDAO
+    abstract val userDAO: UserDAO
 
     companion object {
         @Volatile
-        private var INSTANCE: SubscriberDatabase? = null
+        private var INSTANCE: UserDatabase? = null
 
-        fun getInstance(context: Context): SubscriberDatabase {
+        fun getInstance(context: Context): UserDatabase {
             synchronized(this){
-                var instance:SubscriberDatabase? = INSTANCE
+                var instance:UserDatabase? = INSTANCE
                     if (instance==null){
                         instance = Room.databaseBuilder(
                             context.applicationContext,
-                            SubscriberDatabase::class.java,
+                            UserDatabase::class.java,
                             "subscriber_database"
                         ).build()
                     }
