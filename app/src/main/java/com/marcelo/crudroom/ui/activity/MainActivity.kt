@@ -1,7 +1,8 @@
-package com.marcelo.crudroom
+package com.marcelo.crudroom.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.marcelo.crudroom.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
