@@ -8,8 +8,8 @@ no SQLite por debaixo dos panos. Esse aplicativo também seguiu a arquitetura MV
 e também foi usado a bibilioteca Koin para realizar a injeção de dependência no aplicativo.
 
 ## Screenshots do aplicativo
-![](/imgs/image_1.png?raw=true)
-![](/imgs/image_2.png?raw=true)
+<img src="/imgs/image_1.png" width="200">
+<img src="/imgs/image_2.png" width="200">
 
 ## Tecnologias utilizadas no aplicativo
 
