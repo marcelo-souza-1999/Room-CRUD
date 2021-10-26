@@ -4,6 +4,7 @@ buildscript {
     ext.coroutines_version = '1.5.2'
     ext.lifecycle_version = '2.2.0'
     ext.room_version = '2.3.0'
+    ext.koin_version = '2.2.3'
 
     repositories {
         google()
